@@ -11,8 +11,9 @@ apt-get -qq update && apt-get -qq dist-upgrade
 
 #Install stuff I use all the time
 echo -e "\nInstalling default packages...\n"
-apt-get -qq install build-essential checkinstall fail2ban git git-core libbz2-dev libc6-dev libgdbm-dev libncursesw5-dev libreadline-gplv2-dev libsqlite3-dev libssl-dev nikto nmap nodejs python-dev python-numpy python-scipy python-setuptools tk-dev unattended-upgrades curl ufw
-curl -L https://get.docker.com | sh
+apt-get -qq install build-essential checkinstall fail2ban git git-core libbz2-dev libc6-dev libgdbm-dev libncursesw5-dev libreadline-gplv2-dev libsqlite3-dev libssl-dev nikto nmap unattended-upgrades curl ufw vim daemontools
+#nodejs python-dev python-numpy python-scipy python-setuptools tk-dev
+#curl -L https://get.docker.com | sh
 
 #Install and configure firewall
 echo -e "\nConfiguring firewall...\n"
@@ -28,12 +29,24 @@ echo -e "\nUpdating Timezone to UTC...\n"
 sudo timedatectl set-timezone UTC
 
 #Install Ruby
-echo -e "\nInstalling Ruby...\n"
-apt-get -qq install gnupg2 -y
-curl -sSL https://rvm.io/mpapis.asc | gpg --import -
-curl -L https://get.rvm.io | bash -s stable --ruby
-source /usr/local/rvm/scripts/rvm
+#echo -e "\nInstalling Ruby...\n"
+#apt-get -qq install gnupg2 -y
+#curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+#curl -L https://get.rvm.io | bash -s stable --ruby
+#source /usr/local/rvm/scripts/rvm
 
 #PCAP Everything
-echo -e "\nRunning docker: pcap...\n"
-docker run -v ~/pcap:/pcap --net=host -d jgamblin/tcpdump
+#echo -e "\nRunning docker: pcap...\n"
+#docker run -v ~/pcap:/pcap --net=host -d jgamblin/tcpdump
+
+# Download the Microsoft repository GPG keys
+wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+
+# Register the Microsoft repository GPG keys
+sudo dpkg -i packages-microsoft-prod.deb
+
+# Update the list of products
+sudo apt-get update
+
+# Install PowerShell
+sudo apt-get install -y powershell
